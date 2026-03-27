@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { Flame } from 'lucide-react';
 import { CAT_META } from '@/lib/data';
 import DynamicIcon from './DynamicIcon';
 
@@ -18,71 +18,69 @@ export default function HabitCard({ pattern, trigger, alternative, category, sev
 
   if (accepted) {
     return (
-      <div className="card p-5 flex items-center gap-3 animate-fade-in">
-        <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{ background: '#F0FFF5' }}>
-          <span className="text-xl">✓</span>
+      <div className="glass-card p-6 flex items-center gap-4 animate-fade-in border-white/5">
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10">
+          <DynamicIcon name="Check" size={20} className="text-zinc-200" />
         </div>
         <div>
-          <p className="text-sm font-semibold text-iron">Challenge accepted!</p>
-          <p className="text-xs text-slate mt-0.5">Great choice. Small steps build lasting change.</p>
+          <p className="text-sm font-black text-primary tracking-tight">Challenge accepted</p>
+          <p className="text-xs text-muted mt-1 leading-relaxed italic">"Small steps build lasting change."</p>
         </div>
       </div>
     );
   }
 
   const severityBadge = {
-    low: { label: 'Low', bg: '#EAEAEA', text: '#8A8A8A' },
-    medium: { label: 'Medium', bg: '#FFF8E6', text: '#C07A00' },
-    high: { label: 'High', bg: '#FFF0F0', text: '#C03030' },
+    low: { label: 'Subtle', bg: 'rgba(255,255,255,0.03)', text: '#A0A0A0' },
+    medium: { label: 'Moderate', bg: 'rgba(255,255,255,0.05)', text: '#C0C0C0' },
+    high: { label: 'Significant', bg: 'rgba(255,255,255,0.08)', text: '#EDEDED' },
   }[severity];
 
   return (
-    <div className="card p-5 space-y-4 animate-slide-up">
+    <div className="glass-card p-8 ml-0 space-y-8 animate-slide-up border-white/5">
       {/* Header */}
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl neu-surface-sm flex items-center justify-center">
-            <DynamicIcon name={meta.icon} size={14} className="text-slate" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="p-2.5 bg-white/5 rounded-xl border border-white/5">
+            <DynamicIcon name={meta.icon} size={16} className="text-muted" />
           </div>
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate">{meta.label}</p>
-          </div>
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted">{meta.label}</p>
         </div>
-        <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full flex-shrink-0"
+        <span className="text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-white/5"
           style={{ background: severityBadge.bg, color: severityBadge.text }}>
           {severityBadge.label}
         </span>
       </div>
 
       {/* Pattern */}
-      <div className="neu-inset p-3.5 rounded-2xl border border-white/50">
-        <div className="flex items-center gap-2 mb-1.5">
-          <Sparkles size={10} className="text-silver" />
-          <p className="text-[10px] font-bold text-slate uppercase tracking-widest">A.I. Insight</p>
+      <div className="bg-white/5 p-6 rounded-[2rem] border border-white/5 space-y-4">
+        <div className="flex items-center gap-3">
+          <Flame size={12} className="text-muted/40" />
+          <p className="text-[10px] font-black text-muted/60 uppercase tracking-widest">Observation</p>
         </div>
-        <p className="text-sm font-medium text-smoke leading-snug">"{pattern}"</p>
-        <p className="text-xs text-slate mt-1.5 opacity-80">Context: {trigger}</p>
+        <p className="text-lg font-black text-primary leading-snug">"{pattern}"</p>
+        <p className="text-[11px] text-muted font-medium italic opacity-80">Context: {trigger}</p>
       </div>
 
       {/* Alternative */}
-      <div className="flex gap-3 items-start p-4 rounded-2xl bg-white shadow-soft ring-1 ring-mist/30">
-        <div className="mt-0.5 p-1 rounded-lg bg-mist/20">
-          <DynamicIcon name="Target" size={14} className="text-iron" />
+      <div className="flex gap-4 items-center p-6 rounded-[2rem] bg-white/[0.02] border border-white/5">
+        <div className="p-2 bg-white/5 rounded-lg border border-white/5">
+          <DynamicIcon name="Target" size={16} className="text-muted" />
         </div>
-        <p className="text-sm text-iron leading-relaxed">{alternative}</p>
+        <p className="text-sm text-primary font-bold leading-relaxed">{alternative}</p>
       </div>
 
       {/* Actions */}
-      <div className="flex gap-2">
+      <div className="flex gap-4">
         <button
           onClick={() => setAccepted(true)}
-          className="neu-btn flex-1 flex items-center justify-center gap-2 py-2.5 px-4 text-sm font-semibold text-iron"
+          className="neu-btn flex-1 py-5 text-[10px] font-black text-muted uppercase tracking-[0.2em]"
         >
-          Try this <ArrowRight size={14} />
+          Try this
         </button>
         <button
           onClick={onDismiss}
-          className="px-4 py-2.5 rounded-full text-sm text-slate hover:text-iron transition-colors"
+          className="px-8 py-5 text-[10px] font-black text-muted/40 uppercase tracking-widest hover:text-muted transition-colors"
         >
           Skip
         </button>
