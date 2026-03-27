@@ -1,3 +1,4 @@
+'use client';
 import AppShell from '@/components/layout/AppShell';
 import DynamicIcon from '@/components/DynamicIcon';
 import { USAGE_DATA, APP_BREAKDOWN, HABIT_PATTERNS, CAT_META } from '@/lib/data';

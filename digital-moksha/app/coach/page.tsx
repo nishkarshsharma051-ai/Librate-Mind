@@ -1,3 +1,4 @@
+'use client';
 import { useState, useRef, useEffect } from 'react';
 import AppShell from '@/components/layout/AppShell';
 import DynamicIcon from '@/components/DynamicIcon';

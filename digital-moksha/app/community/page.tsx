@@ -1,4 +1,5 @@
 'use client';
+'use client';
 import { useState } from 'react';
 import AppShell from '@/components/layout/AppShell';
 import PostCard from '@/components/PostCard';
