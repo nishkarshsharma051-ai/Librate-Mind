@@ -1,7 +1,7 @@
-'use client';
 import AppShell from '@/components/layout/AppShell';
-import { USAGE_DATA, APP_BREAKDOWN, HABIT_PATTERNS } from '@/lib/data';
-import { TrendingDown, TrendingUp, Minus, Lightbulb } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
+import { USAGE_DATA, APP_BREAKDOWN, HABIT_PATTERNS, CAT_META } from '@/lib/data';
+import { TrendingDown, TrendingUp, Minus, Lightbulb, PieChart, Info } from 'lucide-react';
 
 const MAX_HOURS = 10;
 
@@ -120,18 +120,21 @@ export default function AnalyticsPage() {
             <Lightbulb size={16} className="text-slate" />
             <h2 className="text-sm font-bold text-smoke uppercase tracking-wide">Habit Insights</h2>
           </div>
-          <div className="space-y-3">
-            {HABIT_PATTERNS.slice(0, 3).map((h, i) => (
-              <div key={i} className="card p-4 flex gap-3 items-start">
-                <div className="w-8 h-8 rounded-xl bg-mist flex items-center justify-center flex-shrink-0 text-sm">
-                  💡
+          <div className="space-y-4">
+            {HABIT_PATTERNS.slice(0, 3).map((h, i) => {
+              const meta = CAT_META[h.category];
+              return (
+                <div key={i} className="card p-5 flex gap-4 items-start group hover:shadow-card-hover transition-all">
+                  <div className="w-10 h-10 rounded-2xl neu-surface-sm flex items-center justify-center flex-shrink-0 text-slate group-hover:text-iron transition-colors">
+                    <DynamicIcon name={meta.icon} size={20} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-bold text-iron leading-snug">{h.pattern}</p>
+                    <p className="text-xs text-slate leading-relaxed opacity-90">{h.alternative}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-iron">{h.pattern}</p>
-                  <p className="text-xs text-slate mt-0.5">{h.alternative}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
-'use client';
 import { useState } from 'react';
-import { ArrowRight, Lightbulb } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { CAT_META } from '@/lib/data';
+import DynamicIcon from './DynamicIcon';
 
 interface HabitCardProps {
   pattern: string;
@@ -41,7 +41,9 @@ export default function HabitCard({ pattern, trigger, alternative, category, sev
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="text-xl">{meta.emoji}</span>
+          <div className="w-8 h-8 rounded-xl neu-surface-sm flex items-center justify-center">
+            <DynamicIcon name={meta.icon} size={14} className="text-slate" />
+          </div>
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-wider text-slate">{meta.label}</p>
           </div>
@@ -53,16 +55,21 @@ export default function HabitCard({ pattern, trigger, alternative, category, sev
       </div>
 
       {/* Pattern */}
-      <div className="neu-inset p-3.5 rounded-2xl">
-        <p className="text-[11px] font-semibold text-slate uppercase tracking-wider mb-1">Detected Pattern</p>
-        <p className="text-sm font-medium text-smoke">"{pattern}"</p>
-        <p className="text-xs text-slate mt-1">Trigger: {trigger}</p>
+      <div className="neu-inset p-3.5 rounded-2xl border border-white/50">
+        <div className="flex items-center gap-2 mb-1.5">
+          <Sparkles size={10} className="text-silver" />
+          <p className="text-[10px] font-bold text-slate uppercase tracking-widest">A.I. Insight</p>
+        </div>
+        <p className="text-sm font-medium text-smoke leading-snug">"{pattern}"</p>
+        <p className="text-xs text-slate mt-1.5 opacity-80">Context: {trigger}</p>
       </div>
 
       {/* Alternative */}
-      <div className="flex gap-3 items-start p-3.5 rounded-2xl" style={{ background: meta.bg }}>
-        <Lightbulb size={16} className="flex-shrink-0 mt-0.5" style={{ color: meta.color }} />
-        <p className="text-sm text-iron">{alternative}</p>
+      <div className="flex gap-3 items-start p-4 rounded-2xl bg-white shadow-soft ring-1 ring-mist/30">
+        <div className="mt-0.5 p-1 rounded-lg bg-mist/20">
+          <DynamicIcon name="Target" size={14} className="text-iron" />
+        </div>
+        <p className="text-sm text-iron leading-relaxed">{alternative}</p>
       </div>
 
       {/* Actions */}

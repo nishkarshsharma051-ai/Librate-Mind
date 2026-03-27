@@ -46,59 +46,70 @@ export const HABIT_PATTERNS = [
 ];
 
 export const DAILY_CHALLENGES = [
-  { id: 'c1', title: 'Phone-Free Morning', desc: 'No phone for the first 30 minutes after waking up', duration: '30 min', points: 20 },
-  { id: 'c2', title: 'Notification Audit', desc: 'Disable notifications from 3 apps you don\'t truly need', duration: '5 min', points: 15 },
-  { id: 'c3', title: 'Mindful Afternoon', desc: 'Take a 15-minute break from all screens', duration: '15 min', points: 25 },
+  { id: 'c1', title: 'Grey Mornings', desc: 'No screen for the first 30 mins after waking.', points: 50, duration: '30m', icon: 'Sunrise' },
+  { id: 'c2', title: 'The Deep Work Box', desc: 'Place your phone in another room for 1 hour.', points: 80, duration: '1h', icon: 'Box' },
+  { id: 'c3', title: 'Walk without Audio', desc: '15 min walk with no music or podcasts.', points: 40, duration: '15m', icon: 'Footprints' },
   { id: 'c4', title: 'Social Scroll Limit', desc: 'Social media for max 20 minutes total today', duration: 'All day', points: 30 },
 ];
 
-export const COMMUNITY_POSTS = [
+export interface Post {
+  id: string;
+  title: string;
+  body: string;
+  category: keyof typeof CAT_META;
+  avatarIcon: string;
+  author: string;
+  reactions: number;
+  comments: number;
+  ts: number;
+  reacted?: boolean;
+}
+
+export const COMMUNITY_POSTS: Post[] = [
   {
-    id: 'post1',
-    title: '7 days without TikTok — here\'s what changed',
-    body: 'I had genuine free time for the first time in years. The first 3 days were rough — I kept reaching for my phone out of pure habit. By day 5, I started reading again.',
-    category: 'phone-addiction' as const,
-    avatar: '🌿',
-    author: 'Anonymous',
-    reactions: 83,
-    comments: 14,
-    ts: Date.now() - 3600000 * 4,
+    id: '1',
+    title: 'Three days without infinite scroll',
+    body: 'I deleted my most addictive social apps on Monday. The first 24 hours were tough—I kept reaching for my phone every few minutes. But today, I actually finished a book for the first time in months. The mental clarity is returning.',
+    category: 'phone-addiction',
+    avatarIcon: 'User',
+    author: 'Anonymous Seeker',
+    reactions: 24,
+    comments: 5,
+    ts: Date.now() - 1000 * 60 * 60 * 3, // 3h ago
+  },
+  {
+    id: '2',
+    title: 'Notification silence is a superpower',
+    body: 'Turning off all non-human notifications changed my life. No more red dots, no more "Special Offer" pings. I only see my phone when I choose to, not when it demands my attention.',
+    category: 'notification-fatigue',
+    avatarIcon: 'Shield',
+    author: 'QuietMind',
+    reactions: 42,
+    comments: 12,
+    ts: Date.now() - 1000 * 60 * 60 * 12, // 12h ago
+  },
+  {
+    id: '3',
+    title: 'Focus Mode saved my final project',
+    body: 'I used to get distracted by notifications every 5 minutes. Locking my phone for 2-hour sprints helped me finish a month\'s worth of work in a week.',
+    category: 'notification-fatigue',
+    avatarIcon: 'Zap',
+    author: 'DeepWorker',
+    reactions: 56,
+    comments: 9,
+    ts: Date.now() - 3600000 * 25,
     reacted: false,
   },
   {
-    id: 'post2',
-    title: 'How I stopped letting Instagram decide my mood',
-    body: 'Unfollowed everyone who made me feel inadequate. Even people I admire. It felt rude at first, then liberating. My anxiety dropped noticeably within a week.',
-    category: 'social-media-anxiety' as const,
-    avatar: '🌸',
-    author: 'SilentPixel',
-    reactions: 127,
-    comments: 31,
-    ts: Date.now() - 3600000 * 9,
-    reacted: false,
-  },
-  {
-    id: 'post3',
-    title: 'I turned off ALL notifications for 2 weeks',
-    body: 'Nothing bad happened. I didn\'t miss anything important. What I gained: I could finish one thought without interruption for the first time in years.',
-    category: 'notification-fatigue' as const,
-    avatar: '🔕',
-    author: 'Anonymous',
-    reactions: 204,
-    comments: 47,
-    ts: Date.now() - 3600000 * 18,
-    reacted: false,
-  },
-  {
-    id: 'post4',
-    title: 'My screen time was 11 hours. I cried.',
-    body: 'When I actually looked at the numbers, I realised I spent more time on my phone than sleeping. This app helped me bring it down to 4.5h in 3 weeks. Slow but real.',
-    category: 'burnout' as const,
-    avatar: '🪫',
-    author: 'EmptyCharge',
-    reactions: 318,
-    comments: 62,
-    ts: Date.now() - 3600000 * 28,
+    id: '4',
+    title: 'The "No Screens in Bedroom" rule',
+    body: 'Best decision ever. I sleep better, wake up feeling rested, and don\'t start my day with someone else\'s highlight reel. Highly recommend trying it for a week.',
+    category: 'burnout',
+    avatarIcon: 'Moon',
+    author: 'RestfulSoul',
+    reactions: 192,
+    comments: 44,
+    ts: Date.now() - 3600000 * 48,
     reacted: false,
   },
 ];
@@ -122,10 +133,30 @@ export const APP_BREAKDOWN = [
 ];
 
 export const CAT_META = {
-  'phone-addiction':      { label: 'Phone Addiction',      emoji: '📱', color: '#7C7CFF', bg: '#F0F0FF' },
-  'social-media-anxiety': { label: 'Social Media Anxiety', emoji: '😰', color: '#FF7CB0', bg: '#FFF0F7' },
-  'notification-fatigue': { label: 'Notification Fatigue', emoji: '🔔', color: '#D4A000', bg: '#FFFBF0' },
-  'burnout':              { label: 'Digital Burnout',       emoji: '🔥', color: '#FF7C7C', bg: '#FFF0F0' },
+  'phone-addiction': {
+    label: 'Digital Detox',
+    icon: 'Smartphone',
+    color: '#8A8A8A',
+    bg: '#F5F5F5'
+  },
+  'social-media-anxiety': {
+    label: 'Mindful Social',
+    icon: 'Share2',
+    color: '#8A8A8A',
+    bg: '#F5F5F5'
+  },
+  'notification-fatigue': {
+    label: 'Focus Flow',
+    icon: 'BellOff',
+    color: '#8A8A8A',
+    bg: '#F5F5F5'
+  },
+  'burnout': {
+    label: 'Deep Rest',
+    icon: 'Wind',
+    color: '#8A8A8A',
+    bg: '#F5F5F5'
+  },
 };
 
 export const COACH_SYSTEM_PROMPT = `You are the AI Detox Coach for Digital Moksha, a premium digital wellness platform.

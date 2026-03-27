@@ -1,14 +1,14 @@
-'use client';
 import { CAT_META, timeAgo } from '@/lib/data';
 import { Heart, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
+import DynamicIcon from './DynamicIcon';
 
 interface PostCardProps {
   id: string;
   title: string;
   body: string;
   category: keyof typeof CAT_META;
-  avatar: string;
+  avatarIcon: string;
   author: string;
   reactions: number;
   comments: number;
@@ -17,7 +17,7 @@ interface PostCardProps {
   onReact?: (id: string) => void;
 }
 
-export default function PostCard({ id, title, body, category, avatar, author, reactions, comments, ts, reacted: initReacted, onReact }: PostCardProps) {
+export default function PostCard({ id, title, body, category, avatarIcon, author, reactions, comments, ts, reacted: initReacted, onReact }: PostCardProps) {
   const [reacted, setReacted] = useState(initReacted ?? false);
   const [count, setCount] = useState(reactions);
   const meta = CAT_META[category];
@@ -33,18 +33,19 @@ export default function PostCard({ id, title, body, category, avatar, author, re
     <article className="card p-5 space-y-3 animate-slide-up">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-2xl neu-surface-sm flex items-center justify-center text-lg flex-shrink-0">
-          {avatar}
+        <div className="w-9 h-9 rounded-2xl neu-surface-sm flex items-center justify-center flex-shrink-0">
+          <DynamicIcon name={avatarIcon} size={16} className="text-slate" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold text-iron truncate">{author}</p>
           <p className="text-xs text-slate">{timeAgo(ts)}</p>
         </div>
         <span
-          className="category-pill flex-shrink-0 text-[10px]"
+          className="category-pill flex-shrink-0 text-[10px] flex items-center gap-1.5"
           style={{ background: meta.bg, color: meta.color }}
         >
-          {meta.emoji} {meta.label}
+          <DynamicIcon name={meta.icon} size={10} />
+          {meta.label}
         </span>
       </div>
 

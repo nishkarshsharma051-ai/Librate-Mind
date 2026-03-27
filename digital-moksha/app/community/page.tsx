@@ -2,14 +2,15 @@
 import { useState } from 'react';
 import AppShell from '@/components/layout/AppShell';
 import PostCard from '@/components/PostCard';
-import { COMMUNITY_POSTS, CAT_META } from '@/lib/data';
-import { PenSquare, X } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
+import { COMMUNITY_POSTS, CAT_META, Post } from '@/lib/data';
+import { PenSquare, X, Plus, Info } from 'lucide-react';
 import { clsx } from 'clsx';
 
 type Category = keyof typeof CAT_META | 'all';
 
 export default function CommunityPage() {
-  const [posts, setPosts] = useState(COMMUNITY_POSTS);
+  const [posts, setPosts] = useState<Post[]>(COMMUNITY_POSTS);
   const [filter, setFilter] = useState<Category>('all');
   const [showModal, setShowModal] = useState(false);
   const [newTitle, setNewTitle] = useState('');
@@ -23,11 +24,11 @@ export default function CommunityPage() {
     if (!newBody.trim()) return;
     const post = {
       id: 'p' + Date.now(),
-      title: newTitle.trim() || 'Anonymous story',
+      title: newTitle.trim() || 'Anonymous Story',
       body: newBody.trim(),
       category: newCat,
-      avatar: ['🌿','🌸','🌊','🪴','🌙'][Math.floor(Math.random() * 5)],
-      author: anon ? 'Anonymous' : 'You',
+      avatarIcon: ['Shield', 'Heart', 'Wind', 'Zap', 'Target'][Math.floor(Math.random() * 5)],
+      author: anon ? 'Anonymous Explorer' : 'You',
       reactions: 0,
       comments: 0,
       ts: Date.now(),
@@ -50,14 +51,18 @@ export default function CommunityPage() {
               </button>
             </div>
 
-            <div className="neu-inset rounded-2xl p-1 flex gap-1 flex-wrap">
+            <div className="neu-inset rounded-2xl p-1.5 flex gap-1 flex-wrap bg-fog/30">
               {(Object.entries(CAT_META) as [keyof typeof CAT_META, typeof CAT_META[keyof typeof CAT_META]][]).map(([key, meta]) => (
                 <button
                   key={key}
                   onClick={() => setNewCat(key)}
-                  className={clsx('flex-1 py-2 px-2 rounded-xl text-xs font-semibold transition-all', newCat === key ? 'neu-surface-sm text-iron' : 'text-slate')}
+                  className={clsx(
+                    'flex-1 py-2 px-3 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap',
+                    newCat === key ? 'neu-surface-sm text-iron shadow-sm' : 'text-slate hover:bg-mist/40'
+                  )}
                 >
-                  {meta.emoji} {meta.label.split(' ')[0]}
+                  <DynamicIcon name={meta.icon} size={12} />
+                  {meta.label.split(' ')[0]}
                 </button>
               ))}
             </div>
@@ -115,17 +120,28 @@ export default function CommunityPage() {
         </div>
 
         {/* Filters */}
-        <div className="flex gap-2 overflow-x-auto pb-1">
-          {[['all', '✦ All'] as const, ...Object.entries(CAT_META).map(([k, v]) => [k, `${v.emoji} ${v.label.split(' ')[0]}`] as const)].map(([key, label]) => (
+        <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide pt-1">
+          <button
+            onClick={() => setFilter('all')}
+            className={clsx(
+              'flex-shrink-0 px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2',
+              filter === 'all' ? 'neu-surface-sm text-iron' : 'bg-white text-slate shadow-sm border border-mist hover:border-silver/50'
+            )}
+          >
+            <DynamicIcon name="LayoutGrid" size={14} />
+            All Feed
+          </button>
+          {(Object.entries(CAT_META) as [keyof typeof CAT_META, typeof CAT_META[keyof typeof CAT_META]][]).map(([key, meta]) => (
             <button
               key={key}
-              onClick={() => setFilter(key as Category)}
+              onClick={() => setFilter(key)}
               className={clsx(
-                'flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all',
+                'flex-shrink-0 px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2',
                 filter === key ? 'neu-surface-sm text-iron' : 'bg-white text-slate shadow-sm border border-mist hover:border-silver/50'
               )}
             >
-              {label}
+              <DynamicIcon name={meta.icon} size={14} />
+              {meta.label}
             </button>
           ))}
         </div>

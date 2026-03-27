@@ -2,7 +2,8 @@
 import { useState, useEffect, useRef } from 'react';
 import AppShell from '@/components/layout/AppShell';
 import NeuToggle from '@/components/NeuToggle';
-import { Play, Pause, RotateCcw, Bell, BellOff } from 'lucide-react';
+import DynamicIcon from '@/components/DynamicIcon';
+import { Play, Pause, RotateCcw, Bell, BellOff, Info } from 'lucide-react';
 
 const PRESETS = [
   { label: '15 min', seconds: 900 },
@@ -12,12 +13,12 @@ const PRESETS = [
 ];
 
 const APP_NOTIFICATIONS = [
-  { id: 'social', label: 'Social Media', icon: '📱', defaultOn: false },
-  { id: 'messages', label: 'Messages & Email', icon: '💬', defaultOn: true },
-  { id: 'news', label: 'News & Updates', icon: '📰', defaultOn: false },
-  { id: 'shopping', label: 'Shopping', icon: '🛒', defaultOn: false },
-  { id: 'games', label: 'Games', icon: '🎮', defaultOn: false },
-  { id: 'calls', label: 'Phone Calls', icon: '📞', defaultOn: true },
+  { id: 'social', label: 'Social Media', icon: 'Share2', defaultOn: false },
+  { id: 'messages', label: 'Direct Messages', icon: 'MessageCircle', defaultOn: true },
+  { id: 'news', label: 'News & Media', icon: 'Newspaper', defaultOn: false },
+  { id: 'shopping', label: 'Retail & Shopping', icon: 'ShoppingBag', defaultOn: false },
+  { id: 'games', label: 'Entertainment & Games', icon: 'Gamepad2', defaultOn: false },
+  { id: 'calls', label: 'Emergency Calls', icon: 'Phone', defaultOn: true },
 ];
 
 function formatTime(s: number) {
@@ -137,11 +138,13 @@ export default function FocusPage() {
               {Object.values(notifToggles).filter(v => !v).length} blocked
             </div>
           </div>
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             {APP_NOTIFICATIONS.map(app => (
-              <div key={app.id} className="card px-4 py-3.5 flex items-center gap-4">
-                <span className="text-xl">{app.icon}</span>
-                <span className="flex-1 text-sm font-medium text-iron">{app.label}</span>
+              <div key={app.id} className="card px-5 py-4 flex items-center gap-4 group hover:shadow-card-hover transition-shadow">
+                <div className="w-10 h-10 rounded-2xl neu-surface-sm flex items-center justify-center text-slate group-hover:text-iron transition-colors">
+                  <DynamicIcon name={app.icon} size={20} />
+                </div>
+                <span className="flex-1 text-sm font-semibold text-iron">{app.label}</span>
                 <NeuToggle
                   size="sm"
                   checked={notifToggles[app.id]}

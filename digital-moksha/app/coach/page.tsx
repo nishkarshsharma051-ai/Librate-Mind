@@ -1,8 +1,8 @@
-'use client';
 import { useState, useRef, useEffect } from 'react';
 import AppShell from '@/components/layout/AppShell';
+import DynamicIcon from '@/components/DynamicIcon';
 import { DAILY_CHALLENGES, AI_MOCK_RESPONSES, COACH_SYSTEM_PROMPT } from '@/lib/data';
-import { Send, Bot, User, Sparkles } from 'lucide-react';
+import { Send, Bot, User, Sparkles, MessageSquarePlus } from 'lucide-react';
 import { clsx } from 'clsx';
 
 type Message = { role: 'user' | 'assistant'; content: string; ts: number };
@@ -61,24 +61,25 @@ export default function CoachPage() {
         </div>
 
         {/* Daily Challenge strip */}
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+        <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide pt-1">
           {DAILY_CHALLENGES.map(c => (
             <button
               key={c.id}
               onClick={() => {
                 setActiveChallenge(c.id === activeChallenge ? null : c.id);
                 if (c.id !== activeChallenge) {
-                  setInput(`Help me with: ${c.title} — ${c.desc}`);
+                  setInput(`Can you help me with the "${c.title}" challenge? ${c.desc}`);
                 }
               }}
               className={clsx(
-                'flex-shrink-0 px-4 py-2.5 rounded-2xl text-sm font-medium transition-all',
+                'flex-shrink-0 px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 mt-1 mb-1',
                 activeChallenge === c.id
-                  ? 'neu-surface-sm text-iron'
-                  : 'bg-white text-slate shadow-card border border-mist hover:border-silver/40'
+                  ? 'neu-surface-sm text-iron shadow-sm scale-[0.98]'
+                  : 'bg-white text-slate shadow-sm border border-mist hover:border-silver/50 hover:shadow-md'
               )}
             >
-              ⚡ {c.title}
+              <DynamicIcon name={c.icon || 'Zap'} size={14} />
+              {c.title}
             </button>
           ))}
         </div>

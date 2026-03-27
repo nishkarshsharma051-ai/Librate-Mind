@@ -3,8 +3,9 @@ import { useState } from 'react';
 import AppShell from '@/components/layout/AppShell';
 import ScoreRing from '@/components/ScoreRing';
 import HabitCard from '@/components/HabitCard';
+import DynamicIcon from '@/components/DynamicIcon';
 import { MOCK_USER, HABIT_PATTERNS, DAILY_CHALLENGES, getGreeting } from '@/lib/data';
-import { CheckCircle, Focus, MessageCircle, Users, TrendingDown, Zap } from 'lucide-react';
+import { CheckCircle, Focus, MessageCircle, Users, TrendingDown, Zap, BarChart3, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -93,18 +94,18 @@ export default function DashboardPage() {
                 <button
                   key={c.id}
                   onClick={() => setCompletedChallenges(p => done ? p.filter(x => x !== c.id) : [...p, c.id])}
-                  className={`w-full card px-4 py-3.5 flex items-center gap-4 text-left transition-all ${done ? 'opacity-60' : ''}`}
+                  className={`w-full card px-4 py-3.5 flex items-center gap-4 text-left transition-all group ${done ? 'opacity-60' : ''}`}
                 >
-                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${done ? 'bg-green-50' : 'neu-surface-sm'}`}>
-                    {done ? <CheckCircle size={16} className="text-success" /> : <span className="text-sm">⚡</span>}
+                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all ${done ? 'bg-green-50' : 'neu-surface-sm group-hover:shadow-card-hover'}`}>
+                    {done ? <CheckCircle size={18} className="text-green-500" /> : <DynamicIcon name={c.icon || 'Zap'} size={18} className="text-slate" />}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-sm font-semibold ${done ? 'line-through text-slate' : 'text-iron'}`}>{c.title}</p>
-                    <p className="text-xs text-slate truncate">{c.desc}</p>
+                    <p className={`text-sm font-bold ${done ? 'line-through text-slate' : 'text-iron'}`}>{c.title}</p>
+                    <p className="text-xs text-slate mt-0.5">{c.desc}</p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <p className="text-xs font-bold text-silver">+{c.points}pts</p>
-                    <p className="text-[10px] text-slate">{c.duration}</p>
+                    <p className="text-xs font-bold text-iron/70">+{c.points}p</p>
+                    <p className="text-[10px] text-slate mt-0.5">{c.duration}</p>
                   </div>
                 </button>
               );
