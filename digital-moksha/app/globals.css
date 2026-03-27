@@ -15,6 +15,8 @@
   --shadow: rgba(0,0,0,0.05);
   --neu-light: #FFFFFF;
   --neu-dark: #D1D1D1;
+  --silver-start: #1A1A1A;
+  --silver-end: #A0A0A0;
 }
 
 [data-theme='dark'] {
@@ -30,6 +32,8 @@
   --shadow: rgba(0,0,0,0.4);
   --neu-light: #242424;
   --neu-dark: #0f0f0f;
+  --silver-start: #EDEDED;
+  --silver-end: #6F6F6F;
 }
 
 /* ── Base ── */

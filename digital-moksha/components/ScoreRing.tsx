@@ -15,7 +15,7 @@ export default function ScoreRing({ score, label = 'Addiction Score', status = '
           {/* Background track */}
           <circle 
             cx="50" cy="50" r="44" 
-            stroke="rgba(255,255,255,0.04)" 
+            stroke="var(--border)" 
             strokeWidth="8" 
             fill="transparent"
             strokeLinecap="round"
@@ -36,8 +36,8 @@ export default function ScoreRing({ score, label = 'Addiction Score', status = '
           
           <defs>
             <linearGradient id="silverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#EDEDED" />
-              <stop offset="100%" stopColor="#6F6F6F" />
+              <stop offset="0%" style={{ stopColor: 'var(--silver-start)' }} />
+              <stop offset="100%" style={{ stopColor: 'var(--silver-end)' }} />
             </linearGradient>
           </defs>
         </svg>

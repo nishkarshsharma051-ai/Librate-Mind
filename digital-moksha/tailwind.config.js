@@ -8,15 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#121212',
-        surface:    '#1A1A1A',
-        card:       'rgba(255,255,255,0.04)',
-        primary:    '#EDEDED',
-        secondary:  '#A0A0A0',
-        muted:      '#6F6F6F',
-        silver:     '#C0C0C0',
-        iron:       '#8A8A8A',
-        mist:       'rgba(255,255,255,0.08)',
+        background: 'var(--background)',
+        surface:    'var(--surface)',
+        card:       'var(--glass-bg)',
+        primary:    'var(--foreground)',
+        secondary:  'var(--secondary)',
+        muted:      'var(--muted)',
+        border:     'var(--border)',
+        silver:     'var(--silver-start)',
+        iron:       'var(--silver-end)',
+        mist:       'var(--glass-border)',
         accent: {
           phone:  '#7C7CFF',
           social: '#FF7CB0',
