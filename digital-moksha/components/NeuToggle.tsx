@@ -37,12 +37,12 @@ export default function NeuToggle({ checked: controlledChecked, onChange, label,
             height: thumb,
             transform: checked ? `translateX(${travel}px)` : 'translateX(0)',
             background: checked
-              ? 'linear-gradient(135deg, #8A8A8A, #C0C0C0)'
-              : '#F5F5F5',
+              ? 'linear-gradient(135deg, var(--silver-start), var(--silver-end))'
+              : 'var(--background)',
           }}
         />
       </div>
-      {label && <span className="text-sm font-medium text-iron">{label}</span>}
+      {label && <span className="text-sm font-medium text-primary">{label}</span>}
     </label>
   );
 }

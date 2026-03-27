@@ -143,6 +143,12 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     background: var(--fog);
     box-shadow: var(--shadow-neu-inset);
   }
+
+  .neu-toggle-track {
+    background: var(--surface);
+    box-shadow: var(--shadow-neu-inset);
+    border-radius: 999px;
+  }
   
   .neu-btn {
     @apply rounded-2xl transition-all active:scale-[0.97] active:translate-y-0.5 border;
