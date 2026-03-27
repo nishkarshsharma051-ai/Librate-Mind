@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, MessageCircle, Focus, Users, BarChart2, Zap, Flame } from 'lucide-react';
+import { LayoutDashboard, MessageCircle, Focus, Users, BarChart2, Flame } from 'lucide-react';
 import { clsx } from 'clsx';
+import ThemeToggle from '../ThemeToggle';
 
 const NAV = [
   { href: '/',           label: 'Dashboard', icon: LayoutDashboard },
@@ -18,8 +19,8 @@ export default function Sidebar() {
     <aside className="hidden md:flex flex-col w-64 h-screen sticky top-0 bg-transparent border-r border-white/5 px-6 py-10 gap-2 flex-shrink-0">
       {/* Brand */}
       <div className="flex items-center gap-4 px-2 mb-10">
-        <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center shadow-hero-glow">
-          <Zap size={18} className="text-zinc-400" />
+        <div className="w-10 h-10 rounded-2xl glass-card flex items-center justify-center shadow-hero-glow">
+          <Flame size={18} className="text-secondary" />
         </div>
         <div>
           <p className="font-black text-primary text-sm leading-tight tracking-tight">Digital Moksha</p>
@@ -51,15 +52,18 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="mt-auto px-4">
-        <div className="glass-card p-6 border-white/60 space-y-4">
+      <div className="mt-auto px-4 space-y-6">
+        <div className="flex justify-start px-2">
+           <ThemeToggle />
+        </div>
+        <div className="glass-card p-6 border-white/10 space-y-4">
           <div className="flex items-center gap-3">
-             <div className="p-1.5 bg-zinc-50 rounded-lg">
-                <Flame size={14} className="text-zinc-800" strokeWidth={1.5} />
+             <div className="p-1.5 bg-white/5 rounded-lg border border-white/10">
+                <Flame size={14} className="text-secondary" strokeWidth={1.5} />
              </div>
-             <p className="text-[11px] font-bold text-zinc-800 tracking-wide">7 Days Active</p>
+             <p className="text-[11px] font-bold text-primary tracking-wide">7 Days Active</p>
           </div>
-          <p className="text-[11px] font-medium text-zinc-400 leading-relaxed italic">"You are developing a natural equilibrium."</p>
+          <p className="text-[11px] font-medium text-muted leading-relaxed italic">"You are developing a natural equilibrium."</p>
         </div>
       </div>
     </aside>

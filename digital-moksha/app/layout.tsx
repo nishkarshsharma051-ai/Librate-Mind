@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -33,8 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className={inter.className}> {/* Changed className and applied Inter font */}
-        <div className="premium-grain" /> {/* Added premium-grain overlay div */}
-        {children}
+        <ThemeProvider>
+          <div className="premium-grain" /> {/* Added premium-grain overlay div */}
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
