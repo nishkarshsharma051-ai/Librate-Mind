@@ -17,7 +17,7 @@ export default function DashboardPage() {
           <div className="space-y-1">
             <h1 className="text-4xl font-black text-iron tracking-tight">Good morning, Nishkarsh</h1>
             <p className="text-zinc-500 font-medium flex items-center gap-2">
-              7-day streak 🔥 — you're building momentum.
+              7-day streak — you're building momentum.
             </p>
           </div>
           <div className="glass-card px-6 py-3 flex items-center gap-4 border-white/40 shadow-sm">

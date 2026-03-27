@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, MessageCircle, Focus, Users, BarChart2, Zap } from 'lucide-react';
+import { LayoutDashboard, MessageCircle, Focus, Users, BarChart2, Zap, Flame } from 'lucide-react';
 import { clsx } from 'clsx';
 
 const NAV = [
@@ -51,10 +51,15 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="mt-auto px-3">
-        <div className="glass-card p-4">
-          <p className="text-xs font-semibold text-iron mb-1">🔥 7-day streak</p>
-          <p className="text-xs text-slate">Keep going — you're building real habits.</p>
+      <div className="mt-auto px-4">
+        <div className="glass-card p-5 border-white/60 space-y-3">
+          <div className="flex items-center gap-3">
+             <div className="p-1.5 bg-zinc-100 rounded-lg">
+                <Flame size={14} className="text-zinc-900" strokeWidth={2.5} />
+             </div>
+             <p className="text-[10px] font-black text-zinc-800 uppercase tracking-widest">7-day streak</p>
+          </div>
+          <p className="text-[11px] font-bold text-zinc-400 leading-relaxed">Keep going — you're building real habits.</p>
         </div>
       </div>
     </aside>
