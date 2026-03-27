@@ -26,6 +26,12 @@
   
   --silver-start: #1A1A1A;
   --silver-end: #5A5A5A;
+  --bubble-op: 0.4;
+  --bubble-op-sm: 0.2;
+  --bubble-op-md: 0.25;
+  --bubble-op-lg: 0.35;
+  --bubble-op-hero: 0.3;
+  --bubble-op-accent: 0.2;
 }
 
 [data-theme='dark'] {
@@ -50,6 +56,12 @@
   
   --silver-start: #EDEDED;
   --silver-end: #6F6F6F;
+  --bubble-op: 0.1;
+  --bubble-op-sm: 0.05;
+  --bubble-op-md: 0.08;
+  --bubble-op-lg: 0.12;
+  --bubble-op-hero: 0.1;
+  --bubble-op-accent: 0.05;
 }
 
 /* ── Base ── */

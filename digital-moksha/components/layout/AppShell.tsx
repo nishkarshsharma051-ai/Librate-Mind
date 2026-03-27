@@ -9,11 +9,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen bg-transparent relative text-primary">
-      {/* Organic Background Elements */}
-      <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none bg-gradient-to-br from-[#121212] to-[#1A1A1A]">
-        <div className="glass-bubble w-[600px] h-[600px] -top-20 -left-20 opacity-10" />
-        <div className="glass-bubble w-[350px] h-[350px] top-[10%] left-[30%] opacity-10" />
-        <div className="glass-bubble w-[450px] h-[450px] -bottom-10 -right-10 opacity-10" />
+      {/* Organic Background Elements (Restored high-fidelity state) */}
+      <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none bg-background transition-colors duration-500">
+        <div className="glass-bubble w-[600px] h-[600px] -top-20 -left-20 opacity-[var(--bubble-op,0.4)]" />
+        <div className="glass-bubble w-[300px] h-[300px] top-[70%] left-[5%] opacity-[var(--bubble-op-sm,0.2)]" />
+        <div className="glass-bubble w-[500px] h-[500px] -bottom-20 left-[40%] opacity-[var(--bubble-op-md,0.25)]" />
+        <div className="glass-bubble w-[350px] h-[350px] top-[10%] left-[30%] opacity-[var(--bubble-op-lg,0.35)]" />
+        <div className="glass-bubble w-[450px] h-[450px] -bottom-10 -right-10 opacity-[var(--bubble-op-hero,0.3)]" />
+        <div className="glass-bubble w-[250px] h-[250px] top-[20%] right-[10%] opacity-[var(--bubble-op-accent,0.2)]" />
       </div>
 
       <Sidebar />
