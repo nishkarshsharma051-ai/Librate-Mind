@@ -8,16 +8,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="flex min-h-screen bg-transparent relative">
+    <div className="flex min-h-screen bg-transparent relative text-primary">
       {/* Organic Background Elements */}
-      <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none">
-        <div className="glass-bubble w-[600px] h-[600px] -top-20 -left-20 opacity-40 scale-110" />
-        <div className="glass-bubble w-[400px] h-[400px] top-[40%] left-[80%] opacity-30" />
-        <div className="glass-bubble w-[300px] h-[300px] top-[70%] left-[5%] opacity-20" />
-        <div className="glass-bubble w-[500px] h-[500px] -bottom-20 left-[40%] opacity-25" />
-        <div className="glass-bubble w-[350px] h-[350px] top-[10%] left-[30%] opacity-35" />
-        <div className="glass-bubble w-[450px] h-[450px] -bottom-10 -right-10 opacity-30" />
-        <div className="glass-bubble w-[250px] h-[250px] top-[20%] right-[10%] opacity-20" />
+      <div className="fixed inset-0 overflow-hidden -z-10 pointer-events-none bg-gradient-to-br from-[#121212] to-[#1A1A1A]">
+        <div className="glass-bubble w-[600px] h-[600px] -top-20 -left-20 opacity-10" />
+        <div className="glass-bubble w-[350px] h-[350px] top-[10%] left-[30%] opacity-10" />
+        <div className="glass-bubble w-[450px] h-[450px] -bottom-10 -right-10 opacity-10" />
       </div>
 
       <Sidebar />
