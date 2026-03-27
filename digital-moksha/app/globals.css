@@ -30,6 +30,7 @@
   --silver-start: #1A1A1A;
   --silver-end: #5A5A5A;
   --bubble-bg: radial-gradient(circle at 35% 35%, rgba(200,200,200,0.4) 0%, rgba(150,150,150,0.1) 100%);
+  --bubble-border: rgba(0,0,0,0.08);
   --bubble-op: 0.15;
   --bubble-op-sm: 0.08;
   --bubble-op-md: 0.1;
@@ -37,8 +38,8 @@
   --bubble-op-hero: 0.1;
   --bubble-op-accent: 0.08;
 
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(200, 200, 200, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(200, 200, 200, 0.4);
   --glass-blur: blur(24px) saturate(200%);
 }
 
