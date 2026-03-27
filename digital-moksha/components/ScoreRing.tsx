@@ -4,53 +4,50 @@ import { motion } from 'framer-motion';
 interface ScoreRingProps {
   score: number;
   label?: string;
+  status?: string;
 }
 
-export default function ScoreRing({ score, label = 'Addiction Score' }: ScoreRingProps) {
+export default function ScoreRing({ score, label = 'Addiction Score', status = 'Struggling' }: ScoreRingProps) {
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="relative flex items-center justify-center p-8">
-        <svg className="transform -rotate-90 w-full h-full max-w-[280px]" viewBox="0 0 100 100">
+    <div className="flex flex-col items-center">
+      <div className="relative flex items-center justify-center p-4">
+        <svg className="transform -rotate-90 w-[240px] h-[240px]" viewBox="0 0 100 100">
           {/* Background track */}
           <circle 
-            cx="50" cy="50" r="42" 
-            stroke="url(#trackGradient)" 
-            strokeWidth="10" 
+            cx="50" cy="50" r="44" 
+            stroke="#F5F5F5" 
+            strokeWidth="8" 
             fill="transparent"
             strokeLinecap="round"
           />
           {/* Progress ring */}
           <motion.circle
-            cx="50" cy="50" r="42"
+            cx="50" cy="50" r="44"
             stroke="url(#scoreGradient)"
-            strokeWidth="10"
+            strokeWidth="8"
             fill="transparent"
-            strokeDasharray={264}
-            initial={{ strokeDashoffset: 264 }}
-            animate={{ strokeDashoffset: 264 - (264 * score) / 100 }}
+            strokeDasharray={276}
+            initial={{ strokeDashoffset: 276 }}
+            animate={{ strokeDashoffset: 276 - (276 * score) / 100 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             strokeLinecap="round"
-            className="drop-shadow-[0_0_8px_rgba(138,138,138,0.2)]"
+            className="drop-shadow-[0_0_12px_rgba(255,188,124,0.3)]"
           />
           
           <defs>
             <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#4A4A4A" />
-              <stop offset="100%" stopColor="#8A8A8A" />
-            </linearGradient>
-            <linearGradient id="trackGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#EAEAEA" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#F5F5F5" stopOpacity="0.8" />
+              <stop offset="0%" stopColor="#8A8A8A" />
+              <stop offset="100%" stopColor="#FFBC7C" />
             </linearGradient>
           </defs>
         </svg>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="hero-number text-7xl md:text-8xl">{score}</span>
-          <span className="text-zinc-400 font-bold tracking-[0.2em] text-xs uppercase mt-2">Dopamine Score</span>
+        <div className="absolute inset-0 flex flex-col items-center justify-center pt-2">
+          <span className="hero-number text-7xl">{score}</span>
+          <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest -mt-1">{status}</span>
         </div>
       </div>
-      <p className="text-sm text-iron font-medium mt-4">{label}</p>
+      <p className="text-[10px] font-black text-zinc-400 uppercase tracking-[0.3em] mt-2">{label}</p>
     </div>
   );
 }
