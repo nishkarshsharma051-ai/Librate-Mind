@@ -27,11 +27,11 @@ export default function NeuToggle({ checked: controlledChecked, onChange, label,
   return (
     <label className="flex items-center gap-3 cursor-pointer select-none" onClick={toggle}>
       <div
-        className="neu-toggle-track transition-all duration-300 flex-shrink-0"
+        className="neu-toggle-track transition-all duration-500 flex-shrink-0 rounded-full"
         style={{ width: w, height: h, padding: (h - thumb) / 2 }}
       >
         <div
-          className="neu-toggle-thumb"
+          className="neu-toggle-thumb rounded-full transition-all duration-500 shadow-sm"
           style={{
             width: thumb,
             height: thumb,

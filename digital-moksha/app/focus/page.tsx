@@ -116,7 +116,7 @@ export default function FocusPage() {
             </button>
             <button
               onClick={() => setRunning(r => !r)}
-              className="w-16 h-16 rounded-[2rem] bg-primary text-background flex items-center justify-center shadow-lg hover:scale-105 transition-all active:scale-95"
+              className="w-16 h-16 rounded-full bg-primary text-background flex items-center justify-center shadow-hero-glow hover:scale-110 transition-all duration-500 active:scale-95"
             >
               {running ? <Pause size={24} /> : <Play size={24} className="ml-1" />}
             </button>
@@ -138,9 +138,9 @@ export default function FocusPage() {
               {Object.values(notifToggles).filter(v => !v).length} blocked
             </div>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {APP_NOTIFICATIONS.map(app => (
-              <div key={app.id} className="glass-card px-6 py-4 flex items-center gap-4 group hover:scale-[1.01] transition-all border-mist">
+              <div key={app.id} className="glass-card px-6 py-4 flex items-center gap-4 group hover:shadow-hero-glow transition-all duration-500 border-mist">
                 <div className="w-10 h-10 rounded-2xl neu-surface-sm flex items-center justify-center text-muted group-hover:text-primary transition-colors">
                   <DynamicIcon name={app.icon} size={20} />
                 </div>
