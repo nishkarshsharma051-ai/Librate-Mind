@@ -7,7 +7,7 @@ interface ScoreRingProps {
   status?: string;
 }
 
-export default function ScoreRing({ score, label = 'Addiction Score', status = 'Equilibrium' }: ScoreRingProps) {
+export default function ScoreRing({ score, label = 'Addiction Score', status = 'Struggling' }: ScoreRingProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="relative flex items-center justify-center p-4">
@@ -15,7 +15,7 @@ export default function ScoreRing({ score, label = 'Addiction Score', status = '
           {/* Background track */}
           <circle 
             cx="50" cy="50" r="44" 
-            stroke="var(--border)" 
+            stroke="var(--mist)" 
             strokeWidth="8" 
             fill="transparent"
             strokeLinecap="round"
@@ -31,7 +31,7 @@ export default function ScoreRing({ score, label = 'Addiction Score', status = '
             animate={{ strokeDashoffset: 276 - (276 * score) / 100 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             strokeLinecap="round"
-            className="drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+            className="drop-shadow-[0_0_15px_rgba(0,0,0,0.02)]"
           />
           
           <defs>
