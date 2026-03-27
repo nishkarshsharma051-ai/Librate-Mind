@@ -69,8 +69,8 @@ export default function FocusPage() {
       <div className="max-w-2xl mx-auto px-5 py-8 space-y-8 page-enter">
         {/* Header */}
         <div>
-          <h1 className="text-2xl font-bold text-smoke">Focus Mode</h1>
-          <p className="text-sm text-slate mt-1">Block distractions. Reclaim your attention.</p>
+          <h1 className="text-2xl font-black text-primary tracking-tight">Focus Mode</h1>
+          <p className="text-sm text-muted font-medium mt-1 italic">Block distractions. Reclaim your attention.</p>
         </div>
 
         {/* Timer */}
@@ -81,8 +81,8 @@ export default function FocusPage() {
               <button
                 key={p.label}
                 onClick={() => { setPreset(p); setRemaining(p.seconds); setRunning(false); }}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                  preset.label === p.label ? 'neu-surface-sm text-iron' : 'text-slate hover:text-iron'
+                className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
+                  preset.label === p.label ? 'neu-surface-sm text-primary' : 'text-muted hover:text-primary'
                 }`}
               >
                 {p.label}
@@ -93,10 +93,10 @@ export default function FocusPage() {
           {/* Timer ring */}
           <div className="relative" style={{ width: size, height: size }}>
             <svg width={size} height={size} className="-rotate-90">
-              <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#EAEAEA" strokeWidth={10} />
+              <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="var(--mist)" strokeWidth={10} />
               <circle
                 cx={size/2} cy={size/2} r={r}
-                fill="none" stroke={running ? '#8A8A8A' : '#C0C0C0'}
+                fill="none" stroke="var(--silver-start)"
                 strokeWidth={10} strokeLinecap="round"
                 strokeDasharray={circ}
                 strokeDashoffset={offset}
@@ -104,47 +104,47 @@ export default function FocusPage() {
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-5xl font-light text-smoke tracking-tight font-mono">{formatTime(remaining)}</span>
-              <span className="text-sm text-slate mt-1">{running ? 'Focusing...' : 'Ready'}</span>
+              <span className="text-5xl font-black text-primary tracking-tight hero-number">{formatTime(remaining)}</span>
+              <span className="text-[10px] font-black text-muted uppercase tracking-widest mt-1 italic">{running ? 'Focusing' : 'Ready'}</span>
             </div>
           </div>
 
           {/* Controls */}
-          <div className="flex items-center gap-4">
-            <button onClick={reset} className="neu-btn w-12 h-12 flex items-center justify-center text-slate">
+          <div className="flex items-center gap-6">
+            <button onClick={reset} className="neu-btn w-12 h-12 flex items-center justify-center text-muted hover:text-primary">
               <RotateCcw size={18} />
             </button>
             <button
               onClick={() => setRunning(r => !r)}
-              className="w-16 h-16 rounded-full bg-smoke text-fog flex items-center justify-center shadow-card hover:shadow-card-hover transition-all active:scale-95"
+              className="w-16 h-16 rounded-[2rem] bg-primary text-background flex items-center justify-center shadow-lg hover:scale-105 transition-all active:scale-95"
             >
               {running ? <Pause size={24} /> : <Play size={24} className="ml-1" />}
             </button>
-            <div className="neu-btn w-12 h-12 flex items-center justify-center text-slate">
-              <span className="text-sm font-bold text-iron">{completed}</span>
+            <div className="neu-btn w-12 h-12 flex items-center justify-center text-primary font-black text-sm">
+              {completed}
             </div>
           </div>
           {completed > 0 && (
-            <p className="text-xs text-slate">{completed} session{completed > 1 ? 's' : ''} completed today 🎯</p>
+            <p className="text-[10px] font-black text-muted uppercase tracking-widest">{completed} session{completed > 1 ? 's' : ''} completed today</p>
           )}
         </div>
 
         {/* Notification Control */}
         <div>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-bold text-smoke uppercase tracking-wide">Notification Control</h2>
-            <div className="flex items-center gap-1.5 text-xs text-slate">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-[11px] font-black text-primary uppercase tracking-[0.2em]">Notification Control</h2>
+            <div className="flex items-center gap-1.5 text-[10px] font-bold text-muted uppercase tracking-widest">
               <BellOff size={12} />
               {Object.values(notifToggles).filter(v => !v).length} blocked
             </div>
           </div>
           <div className="space-y-3">
             {APP_NOTIFICATIONS.map(app => (
-              <div key={app.id} className="card px-5 py-4 flex items-center gap-4 group hover:shadow-card-hover transition-shadow">
-                <div className="w-10 h-10 rounded-2xl neu-surface-sm flex items-center justify-center text-slate group-hover:text-iron transition-colors">
+              <div key={app.id} className="glass-card px-6 py-4 flex items-center gap-4 group hover:scale-[1.01] transition-all border-mist">
+                <div className="w-10 h-10 rounded-2xl neu-surface-sm flex items-center justify-center text-muted group-hover:text-primary transition-colors">
                   <DynamicIcon name={app.icon} size={20} />
                 </div>
-                <span className="flex-1 text-sm font-semibold text-iron">{app.label}</span>
+                <span className="flex-1 text-sm font-bold text-primary tracking-tight">{app.label}</span>
                 <NeuToggle
                   size="sm"
                   checked={notifToggles[app.id]}
