@@ -13,7 +13,10 @@
   --mist: #EAEAEA;
   --silver: #C0C0C0;
   --iron: #8A8A8A;
-  --fog: #F8F8F8;
+  --surface: #F5F5F5;
+  --secondary: #8A8A8A;
+  --muted: #A0A0A0;
+  --border: rgba(0,0,0,0.05);
   --shadow: rgba(0,0,0,0.05);
 
   --shadow-neu:       6px 6px 14px #D1D1D1, -6px -6px 14px #FFFFFF;
@@ -162,6 +165,10 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
   .neu-btn:active {
     box-shadow: var(--shadow-neu-inset);
   }
+
+  .text-primary { color: var(--foreground); }
+  .text-secondary { color: var(--secondary); }
+  .text-muted { color: var(--muted); }
 
   .gradient-text {
     background: linear-gradient(135deg, var(--foreground) 0%, var(--secondary) 100%);
