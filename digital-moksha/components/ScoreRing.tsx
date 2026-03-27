@@ -15,10 +15,11 @@ export default function ScoreRing({ score, label = 'Addiction Score', status = '
           {/* Background track */}
           <circle 
             cx="50" cy="50" r="44" 
-            stroke="#F5F5F5" 
+            stroke="currentColor" 
             strokeWidth="8" 
             fill="transparent"
             strokeLinecap="round"
+            className="text-zinc-100/10 dark:text-white/5"
           />
           {/* Progress ring */}
           <motion.circle
@@ -31,7 +32,7 @@ export default function ScoreRing({ score, label = 'Addiction Score', status = '
             animate={{ strokeDashoffset: 276 - (276 * score) / 100 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
             strokeLinecap="round"
-            className="drop-shadow-[0_0_12px_rgba(255,188,124,0.3)]"
+            className="drop-shadow-[0_0_12px_rgba(251,146,60,0.2)]"
           />
           
           <defs>
