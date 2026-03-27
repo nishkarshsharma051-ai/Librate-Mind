@@ -23,19 +23,23 @@
   --shadow-neu-sm:    3px 3px 8px #D1D1D1, -3px -3px 8px #FFFFFF;
   --shadow-neu-inset: inset 4px 4px 10px #D1D1D1, inset -4px -4px 10px #FFFFFF;
   
-  --glass-bg: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(200, 200, 200, 0.4);
   --glass-blur: blur(20px) saturate(180%);
   
   --silver-start: #1A1A1A;
   --silver-end: #5A5A5A;
-  --bubble-bg: radial-gradient(circle at 35% 35%, rgba(255,255,255,1) 0%, rgba(210,210,210,0.3) 100%);
-  --bubble-op: 0.6;
-  --bubble-op-sm: 0.4;
-  --bubble-op-md: 0.45;
-  --bubble-op-lg: 0.55;
-  --bubble-op-hero: 0.5;
-  --bubble-op-accent: 0.4;
+  --bubble-bg: radial-gradient(circle at 35% 35%, rgba(200,200,200,0.4) 0%, rgba(150,150,150,0.1) 100%);
+  --bubble-op: 0.15;
+  --bubble-op-sm: 0.08;
+  --bubble-op-md: 0.1;
+  --bubble-op-lg: 0.12;
+  --bubble-op-hero: 0.1;
+  --bubble-op-accent: 0.08;
+
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(200, 200, 200, 0.3);
+  --glass-blur: blur(24px) saturate(200%);
 }
 
 [data-theme='dark'] {
