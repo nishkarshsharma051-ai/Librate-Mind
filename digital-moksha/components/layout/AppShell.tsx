@@ -8,7 +8,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-zinc-900 to-zinc-950">
+    <div className="flex min-h-screen bg-background">
       <Sidebar />
       <AnimatePresence mode="wait">
         <motion.main
