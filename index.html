@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moksha — Digital Wellness Support Network</title>
+  <meta name="description" content="A peer support community for students reclaiming freedom from digital overuse, phone addiction, social media anxiety, and notification fatigue." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+<body>
+
+  <!-- ── ESCALATION MODAL ── -->
+  <div id="escalation-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="esc-title">
+    <div class="modal escalation-modal">
+      <div class="esc-icon">🔔</div>
+      <h2 id="esc-title">We See You Struggling</h2>
+      <p>Your recent check-ins suggest a high level of digital distress. You don't have to face this alone — professional support is available.</p>
+      <div class="esc-resources">
+        <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" class="esc-link">
+          <span class="esc-link-icon">📞</span>
+          <span>Digital Wellness Helpline (SAMHSA)</span>
+        </a>
+        <a href="https://www.digitalwellnessinstitute.com/" target="_blank" class="esc-link">
+          <span class="esc-link-icon">🌐</span>
+          <span>Digital Wellness Institute</span>
+        </a>
+        <a href="https://www.screentime.org/" target="_blank" class="esc-link">
+          <span class="esc-link-icon">📱</span>
+          <span>ScreenTime Recovery Resources</span>
+        </a>
+      </div>
+      <div class="esc-actions">
+        <button id="esc-close" class="btn btn-ghost">I'm okay for now</button>
+        <button class="btn btn-primary" onclick="window.open('https://www.betterhelp.com','_blank')">Talk to a Counselor</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BREATHING OVERLAY ── -->
+  <div id="breath-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-label="Breathing exercise">
+    <div class="modal breath-modal">
+      <button id="breath-close" class="modal-close" aria-label="Close">&times;</button>
+      <h3>60-Second Breath Reset</h3>
+      <p class="breath-subtitle">Follow the circle. Let go of the screen.</p>
+      <div class="breath-ring-wrap">
+        <div id="breath-ring" class="breath-ring"></div>
+        <span id="breath-label" class="breath-label">Inhale</span>
+      </div>
+      <p id="breath-status" class="breath-status">Starting in 3...</p>
+    </div>
+  </div>
+
+  <!-- ── NEW POST MODAL ── -->
+  <div id="post-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="post-title">
+    <div class="modal post-modal">
+      <button id="post-close" class="modal-close" aria-label="Close">&times;</button>
+      <h3 id="post-title">Share Your Experience</h3>
+      <div class="form-group">
+        <label for="post-category">Category</label>
+        <div class="select-wrap">
+          <select id="post-category">
+            <option value="phone-addiction">📱 Phone Addiction</option>
+            <option value="social-media-anxiety">😰 Social Media Anxiety</option>
+            <option value="notification-fatigue">🔔 Notification Fatigue</option>
+            <option value="burnout">🔥 Digital Burnout</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="post-title-input">Title <span class="muted">(optional)</span></label>
+        <input type="text" id="post-title-input" placeholder="What's happening?" maxlength="80" />
+      </div>
+      <div class="form-group">
+        <label for="post-body">Your story</label>
+        <textarea id="post-body" rows="5" placeholder="Describe what you're going through..."></textarea>
+      </div>
+      <div class="form-row">
+        <label class="toggle-row" for="post-anon">
+          <span class="toggle-switch">
+            <input type="checkbox" id="post-anon" checked />
+            <span class="slider"></span>
+          </span>
+          Post anonymously
+        </label>
+        <button id="post-submit" class="btn btn-primary">Share with Community</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── APP SHELL ── -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="14" r="12" stroke="url(#g1)" stroke-width="2"/>
+            <circle cx="14" cy="14" r="6" fill="url(#g1)" opacity="0.3"/>
+            <circle cx="14" cy="14" r="2.5" fill="url(#g1)"/>
+            <defs>
+              <linearGradient id="g1" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#C0C0C0"/>
+                <stop offset="1" stop-color="#808080"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">Moksha</span>
+          <span class="brand-tagline">Digital Wellness Network</span>
+        </div>
+      </div>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <button class="nav-btn active" data-view="landing" id="nav-landing">Home</button>
+        <button class="nav-btn" data-view="feed" id="nav-feed">Community</button>
+        <button class="nav-btn" data-view="checkin" id="nav-checkin">Check-in</button>
+        <button class="nav-btn" data-view="chat" id="nav-chat">Peer Chat</button>
+        <button class="nav-btn" data-view="resources" id="nav-resources">Resources</button>
+      </nav>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">☰</button>
+    </div>
+    <nav class="mobile-nav hidden" id="mobile-nav">
+      <button class="nav-btn active" data-view="landing">Home</button>
+      <button class="nav-btn" data-view="feed">Community</button>
+      <button class="nav-btn" data-view="checkin">Check-in</button>
+      <button class="nav-btn" data-view="chat">Peer Chat</button>
+      <button class="nav-btn" data-view="resources">Resources</button>
+    </nav>
+  </header>
+
+  <main id="app-main">
+
+    <!-- ══ VIEW: LANDING ══ -->
+    <section id="view-landing" class="view active">
+      <div class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+          <div class="hero-badge">CodeVeda · Moksha Theme</div>
+          <h1 class="hero-title">Liberation from<br/><span class="gradient-text">Digital Chains</span></h1>
+          <p class="hero-sub">A safe peer space for students navigating phone addiction, social media anxiety, and notification fatigue. You are not alone — and you can break free.</p>
+          <div class="hero-cta">
+            <button class="btn btn-primary btn-lg" data-view="feed">Join the Community</button>
+            <button class="btn btn-ghost btn-lg" data-view="checkin">Daily Check-in ↓</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat-item"><span class="stat-num">2,847</span><span class="stat-label">Students supported</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">14,203</span><span class="stat-label">Stories shared</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Support categories</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">24/7</span><span class="stat-label">Peer support available</span></div>
+      </div>
+
+      <div class="section-container">
+        <h2 class="section-title">What brings you here?</h2>
+        <div class="category-grid">
+          <button class="cat-card" data-category="phone-addiction">
+            <div class="cat-icon">📱</div>
+            <h3>Phone Addiction</h3>
+            <p>Compulsive checking, phantom vibrations, anxiety without your device</p>
+            <span class="cat-count" id="count-phone-addiction">—</span>
+          </button>
+          <button class="cat-card" data-category="social-media-anxiety">
+            <div class="cat-icon">😰</div>
+            <h3>Social Media Anxiety</h3>
+            <p>FOMO, comparison spirals, doomscrolling, likes-as-self-worth</p>
+            <span class="cat-count" id="count-social-media-anxiety">—</span>
+          </button>
+          <button class="cat-card" data-category="notification-fatigue">
+            <div class="cat-icon">🔔</div>
+            <h3>Notification Fatigue</h3>
+            <p>Never-ending alerts, always-on pressure, unable to disconnect</p>
+            <span class="cat-count" id="count-notification-fatigue">—</span>
+          </button>
+          <button class="cat-card" data-category="burnout">
+            <div class="cat-icon">🔥</div>
+            <h3>Digital Burnout</h3>
+            <p>Exhaustion from screens, mental fog, lost joy in offline life</p>
+            <span class="cat-count" id="count-burnout">—</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="section-container alt-bg">
+        <h2 class="section-title">How Moksha Works</h2>
+        <div class="steps-grid">
+          <div class="step-card"><div class="step-num">01</div><h3>Check In Daily</h3><p>Log your screen time, mood, and stress in 60 seconds. Your personal wellness score tracks your journey.</p></div>
+          <div class="step-card"><div class="step-num">02</div><h3>Share Anonymously</h3><p>Post your experience to a compassionate community of peers who genuinely understand digital overuse.</p></div>
+          <div class="step-card"><div class="step-num">03</div><h3>Support Each Other</h3><p>React, respond, and chat — peer-to-peer support specific to tech stress, not generic advice.</p></div>
+          <div class="step-card"><div class="step-num">04</div><h3>Find Your Moksha</h3><p>Access curated detox tools, breathing exercises, and guided pathways toward digital liberation.</p></div>
+        </div>
+      </div>
+
+      <div class="section-container">
+        <div class="section-header">
+          <h2 class="section-title">From the Community</h2>
+          <button class="btn btn-ghost" data-view="feed">See all →</button>
+        </div>
+        <div id="landing-preview" class="preview-feed"></div>
+      </div>
+    </section>
+
+    <!-- ══ VIEW: FEED ══ -->
+    <section id="view-feed" class="view hidden">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Community</h1>
+          <p class="view-sub">Peer stories, shared struggles, collective healing</p>
+        </div>
+        <button class="btn btn-primary" id="open-post-modal">+ Share Your Story</button>
+      </div>
+      <div class="feed-toolbar">
+        <div class="filter-chips" role="group" aria-label="Filter by category">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="phone-addiction">📱 Phone Addiction</button>
+          <button class="chip" data-filter="social-media-anxiety">😰 Social Media Anxiety</button>
+          <button class="chip" data-filter="notification-fatigue">🔔 Notification Fatigue</button>
+          <button class="chip" data-filter="burnout">🔥 Burnout</button>
+        </div>
+        <div class="sort-wrap">
+          <select id="feed-sort" aria-label="Sort posts">
+            <option value="recent">Most Recent</option>
+            <option value="reactions">Most Felt</option>
+          </select>
+        </div>
+      </div>
+      <div id="feed-container" class="feed-container" role="feed" aria-label="Community posts"></div>
+    </section>
+
+    <!-- ══ VIEW: CHECK-IN ══ -->
+    <section id="view-checkin" class="view hidden">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Daily Check-in</h1>
+          <p class="view-sub">Track your digital wellness in 60 seconds</p>
+        </div>
+        <div id="checkin-streak" class="streak-badge">🔥 <span id="streak-num">0</span> day streak</div>
+      </div>
+      <div class="checkin-layout">
+        <div class="score-panel">
+          <div class="score-ring-wrap">
+            <svg class="score-ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-bg" cx="60" cy="60" r="50"/>
+              <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="314"/>
+            </svg>
+            <div class="score-inner">
+              <span class="score-num" id="score-display">—</span>
+              <span class="score-label">Wellness Score</span>
+            </div>
+          </div>
+          <div class="score-status" id="score-status">Complete your check-in ↓</div>
+          <div class="score-history" id="score-history"></div>
+        </div>
+        <form class="checkin-form" id="checkin-form" novalidate>
+          <div class="slider-group">
+            <div class="slider-header"><label for="sl-screen">📱 Screen time today</label><span class="slider-val" id="sl-screen-val">4h</span></div>
+            <input type="range" id="sl-screen" min="0" max="16" value="4" step="0.5" />
+            <div class="slider-hints"><span>0h (great)</span><span>16h+ (concerning)</span></div>
+          </div>
+          <div class="slider-group">
+            <div class="slider-header"><label for="sl-mood">😌 How do you feel?</label><span class="slider-val" id="sl-mood-val">5</span></div>
+            <input type="range" id="sl-mood" min="1" max="10" value="5" />
+            <div class="slider-hints"><span>1 (terrible)</span><span>10 (great)</span></div>
+          </div>
+          <div class="slider-group">
+            <div class="slider-header"><label for="sl-stress">🌀 Digital stress level</label><span class="slider-val" id="sl-stress-val">5</span></div>
+            <input type="range" id="sl-stress" min="1" max="10" value="5" />
+            <div class="slider-hints"><span>1 (none)</span><span>10 (overwhelming)</span></div>
+          </div>
+          <div class="slider-group">
+            <div class="slider-header"><label for="sl-checks">🔄 Phone check-ins today</label><span class="slider-val" id="sl-checks-val">20</span></div>
+            <input type="range" id="sl-checks" min="0" max="200" value="20" step="5" />
+            <div class="slider-hints"><span>0 (none)</span><span>200+ (compulsive)</span></div>
+          </div>
+          <div class="form-group">
+            <label for="checkin-note">📝 How's your digital life today? <span class="muted">(optional)</span></label>
+            <textarea id="checkin-note" rows="3" placeholder="Any thoughts on your screen habits today..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="checkin-submit">Submit Check-in</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ══ VIEW: PEER CHAT ══ -->
+    <section id="view-chat" class="view hidden">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Peer Support Chat</h1>
+          <p class="view-sub">Anonymous, judgment-free conversations about digital wellness</p>
+        </div>
+        <div class="online-indicator">
+          <span class="online-dot"></span>
+          <span id="online-count">12 peers online</span>
+        </div>
+      </div>
+      <div class="chat-layout">
+        <div class="chat-sidebar">
+          <h3 class="sidebar-title">Support Rooms</h3>
+          <button class="room-btn active" data-room="general" id="room-general"><span class="room-icon">💬</span><div><div class="room-name">General Wellness</div><div class="room-sub">Open discussion</div></div></button>
+          <button class="room-btn" data-room="phone" id="room-phone"><span class="room-icon">📱</span><div><div class="room-name">Phone Addiction</div><div class="room-sub">Shared strategies</div></div></button>
+          <button class="room-btn" data-room="social" id="room-social"><span class="room-icon">😰</span><div><div class="room-name">Social Media</div><div class="room-sub">Anxiety &amp; FOMO</div></div></button>
+          <button class="room-btn" data-room="detox" id="room-detox"><span class="room-icon">🌿</span><div><div class="room-name">Detox Support</div><div class="room-sub">Going screen-free</div></div></button>
+        </div>
+        <div class="chat-main">
+          <div class="chat-messages" id="chat-messages" role="log" aria-live="polite"></div>
+          <div class="typing-indicator hidden" id="typing-indicator">
+            <span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>
+            <span class="typing-name" id="typing-name">Someone</span> is typing...
+          </div>
+          <div class="chat-input-row">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Share your thoughts..." maxlength="500" autocomplete="off" />
+            <button class="btn btn-primary" id="chat-send">Send</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ VIEW: RESOURCES ══ -->
+    <section id="view-resources" class="view hidden">
+      <div class="view-header">
+        <div>
+          <h1 class="view-title">Resources &amp; Tools</h1>
+          <p class="view-sub">Evidence-based strategies for digital liberation</p>
+        </div>
+        <button class="btn btn-primary" id="open-breath">🌬 Start Breathing</button>
+      </div>
+      <div class="resources-grid" id="resources-grid"></div>
+    </section>
+
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/feed.js"></script>
+  <script src="js/checkin.js"></script>
+  <script src="js/escalation.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/resources.js"></script>
+</body>
+</html>
