@@ -34,11 +34,11 @@ export default function PostCard({ id, title, body, category, avatarIcon, author
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="w-9 h-9 rounded-2xl neu-surface-sm flex items-center justify-center flex-shrink-0">
-          <DynamicIcon name={avatarIcon} size={16} className="text-slate" />
+          <DynamicIcon name={avatarIcon} size={16} className="text-secondary" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold text-iron truncate">{author}</p>
-          <p className="text-xs text-slate">{timeAgo(ts)}</p>
+          <p className="text-sm font-bold text-primary truncate tracking-tight">{author}</p>
+          <p className="text-[10px] font-bold text-muted uppercase tracking-widest">{timeAgo(ts)}</p>
         </div>
         <span
           className="category-pill flex-shrink-0 text-[10px] flex items-center gap-1.5"
@@ -50,20 +50,20 @@ export default function PostCard({ id, title, body, category, avatarIcon, author
       </div>
 
       {/* Content */}
-      <h3 className="text-sm font-semibold text-smoke leading-snug">{title}</h3>
-      <p className="text-sm text-slate leading-relaxed line-clamp-3">{body}</p>
+      <h3 className="text-sm font-black text-primary leading-snug tracking-tight">{title}</h3>
+      <p className="text-sm text-muted leading-relaxed line-clamp-3 font-medium">{body}</p>
 
       {/* Footer */}
-      <div className="flex items-center gap-4 pt-1 border-t border-mist">
+      <div className="flex items-center gap-4 pt-4 border-t border-mist">
         <button
           onClick={handleReact}
-          className="flex items-center gap-1.5 text-xs font-medium transition-all"
-          style={{ color: reacted ? '#FF7CB0' : '#8A8A8A' }}
+          className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest transition-all"
+          style={{ color: reacted ? '#FF7CB0' : 'var(--secondary)' }}
         >
           <Heart size={14} fill={reacted ? '#FF7CB0' : 'none'} strokeWidth={2} />
           {count} relate
         </button>
-        <button className="flex items-center gap-1.5 text-xs font-medium text-slate hover:text-iron transition-colors">
+        <button className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-muted hover:text-primary transition-colors">
           <MessageSquare size={14} />
           {comments} replies
         </button>

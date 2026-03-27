@@ -42,23 +42,23 @@ export default function CommunityPage() {
     <AppShell>
       {/* Post Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-end md:items-center justify-center p-4 animate-fade-in">
-          <div className="card w-full max-w-lg p-6 space-y-4">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-end md:items-center justify-center p-4 animate-fade-in">
+          <div className="glass-card w-full max-w-lg p-8 space-y-6 border-mist shadow-hero-glow">
             <div className="flex items-center justify-between">
-              <h3 className="font-bold text-smoke">Share Your Experience</h3>
-              <button onClick={() => setShowModal(false)} className="neu-btn w-8 h-8 flex items-center justify-center text-slate">
-                <X size={14} />
+              <h3 className="text-lg font-black text-primary tracking-tight">Share Your Experience</h3>
+              <button onClick={() => setShowModal(false)} className="neu-btn w-10 h-10 flex items-center justify-center text-muted hover:text-primary">
+                <X size={16} />
               </button>
             </div>
 
-            <div className="neu-inset rounded-2xl p-1.5 flex gap-1 flex-wrap bg-fog/30">
+            <div className="neu-inset rounded-2xl p-1.5 flex gap-1 flex-wrap bg-surface/50 border border-mist">
               {(Object.entries(CAT_META) as [keyof typeof CAT_META, typeof CAT_META[keyof typeof CAT_META]][]).map(([key, meta]) => (
                 <button
                   key={key}
                   onClick={() => setNewCat(key)}
                   className={clsx(
-                    'flex-1 py-2 px-3 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-2 whitespace-nowrap',
-                    newCat === key ? 'neu-surface-sm text-iron shadow-sm' : 'text-slate hover:bg-mist/40'
+                    'flex-1 py-2 px-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 whitespace-nowrap',
+                    newCat === key ? 'neu-surface-sm text-primary shadow-sm border border-mist' : 'text-muted hover:text-primary'
                   )}
                 >
                   <DynamicIcon name={meta.icon} size={12} />
@@ -71,7 +71,7 @@ export default function CommunityPage() {
               value={newTitle}
               onChange={e => setNewTitle(e.target.value)}
               placeholder="Give it a title (optional)"
-              className="w-full neu-inset rounded-2xl px-4 py-3 text-sm text-iron placeholder-slate"
+              className="w-full neu-inset rounded-2xl px-5 py-3.5 text-sm text-primary placeholder-muted bg-surface/30 border border-mist focus:border-primary/30 transition-all outline-none"
             />
 
             <textarea
@@ -79,25 +79,25 @@ export default function CommunityPage() {
               onChange={e => setNewBody(e.target.value)}
               placeholder="Share what you're going through..."
               rows={4}
-              className="w-full neu-inset rounded-2xl px-4 py-3 text-sm text-iron placeholder-slate resize-none"
+              className="w-full neu-inset rounded-2xl px-5 py-4 text-sm text-primary placeholder-muted bg-surface/30 border border-mist focus:border-primary/30 transition-all outline-none resize-none"
             />
 
-            <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2.5 text-sm text-slate cursor-pointer select-none">
+            <div className="flex items-center justify-between pt-2">
+              <label className="flex items-center gap-3 text-xs font-bold text-muted uppercase tracking-widest cursor-pointer select-none">
                 <div
                   onClick={() => setAnon(a => !a)}
-                  className={clsx('w-10 h-6 rounded-full border-2 transition-all relative cursor-pointer', anon ? 'border-silver' : 'border-mist')}
+                  className={clsx('w-10 h-6 rounded-full border-2 transition-all relative cursor-pointer', anon ? 'border-primary/30 bg-primary/10' : 'border-mist bg-surface')}
                 >
-                  <div className={clsx('absolute top-0.5 w-4 h-4 rounded-full transition-all', anon ? 'left-4 bg-silver' : 'left-0.5 bg-mist')} />
+                  <div className={clsx('absolute top-0.5 w-4 h-4 rounded-full transition-all shadow-sm', anon ? 'left-4 bg-primary' : 'left-0.5 bg-muted')} />
                 </div>
-                Post anonymously
+                Anonymous
               </label>
               <button
                 onClick={submit}
                 disabled={!newBody.trim()}
-                className="neu-btn px-5 py-2.5 text-sm font-semibold text-iron disabled:opacity-40"
+                className="neu-btn px-6 py-3 text-[10px] font-black uppercase tracking-widest text-primary disabled:opacity-30 disabled:grayscale transition-all"
               >
-                Share
+                Post Story
               </button>
             </div>
           </div>
@@ -108,24 +108,24 @@ export default function CommunityPage() {
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-smoke">Community</h1>
-            <p className="text-sm text-slate mt-1">Anonymous peer support — real stories, real help</p>
+            <h1 className="text-2xl font-black text-primary tracking-tight">Community</h1>
+            <p className="text-sm text-muted font-medium mt-1 italic">Anonymous peer support — real stories, real help</p>
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="neu-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-iron flex-shrink-0"
+            className="neu-btn flex items-center gap-2 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-primary flex-shrink-0"
           >
             <PenSquare size={15} /> Share
           </button>
         </div>
 
         {/* Filters */}
-        <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-hide pt-1">
+        <div className="flex gap-2.5 overflow-x-auto pb-4 scrollbar-hide pt-1">
           <button
             onClick={() => setFilter('all')}
             className={clsx(
-              'flex-shrink-0 px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2',
-              filter === 'all' ? 'neu-surface-sm text-iron' : 'bg-white text-slate shadow-sm border border-mist hover:border-silver/50'
+              'flex-shrink-0 px-5 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2',
+              filter === 'all' ? 'neu-surface-sm text-primary' : 'bg-surface/50 text-muted shadow-sm border border-mist hover:border-secondary/50'
             )}
           >
             <DynamicIcon name="LayoutGrid" size={14} />
@@ -136,8 +136,8 @@ export default function CommunityPage() {
               key={key}
               onClick={() => setFilter(key)}
               className={clsx(
-                'flex-shrink-0 px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2',
-                filter === key ? 'neu-surface-sm text-iron' : 'bg-white text-slate shadow-sm border border-mist hover:border-silver/50'
+                'flex-shrink-0 px-5 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 border',
+                filter === key ? 'neu-surface-sm text-primary border-mist shadow-hero-glow' : 'bg-surface/50 text-muted shadow-sm border-mist hover:border-secondary/50'
               )}
             >
               <DynamicIcon name={meta.icon} size={14} />

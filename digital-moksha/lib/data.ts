@@ -136,26 +136,26 @@ export const CAT_META = {
   'phone-addiction': {
     label: 'Digital Detox',
     icon: 'Smartphone',
-    color: '#8A8A8A',
-    bg: '#F5F5F5'
+    color: 'var(--iron)',
+    bg: 'var(--surface)'
   },
   'social-media-anxiety': {
     label: 'Mindful Social',
     icon: 'Share2',
-    color: '#8A8A8A',
-    bg: '#F5F5F5'
+    color: 'var(--iron)',
+    bg: 'var(--surface)'
   },
   'notification-fatigue': {
     label: 'Focus Flow',
     icon: 'BellOff',
-    color: '#8A8A8A',
-    bg: '#F5F5F5'
+    color: 'var(--iron)',
+    bg: 'var(--surface)'
   },
   'burnout': {
     label: 'Deep Rest',
     icon: 'Wind',
-    color: '#8A8A8A',
-    bg: '#F5F5F5'
+    color: 'var(--iron)',
+    bg: 'var(--surface)'
   },
 };
 
